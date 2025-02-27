@@ -76,6 +76,13 @@ Amazon_ML_Challenge_Dataset/
 ├── README.md                   # This file
 └── LICENSE
 ```
+<div><img src="https://machinelearningmastery.com/wp-content/uploads/2021/08/attention_research_1.png" alt="Scan2text Logo" height="400" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrBZYuRm6i3nDz07SqtHaVLZdNgVjJrnJDLVE1gn0sFL7lu2N2BtSNG4kjldSSBlwrwvA&usqp=CAU" alt="Scan2text Logo" height="400" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStdVyIlGWgJVjWtBMNOCfK7GA2CAWPuVqhDFUiTrw9y7I0Qzx63t4fDF-irj02uiGYVnM&usqp=CAU" alt="Scan2text Logo" height="400" >
+  <img src="https://miro.medium.com/v2/resize:fit:1400/1*IHT7lqvEiuu1BzVIXXD0hA.png" alt="Scan2text Logo" height="400" >
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgmMpEY8CqGlMRT2OHIeyNW6wHWtlm1L02Cpe5esFGbuRFn6BXE5KWbA7J26pNXAT1sA&usqp=CAU" alt="Scan2text Logo" height="400" >
+</div>
+
 ## Explanation of the Structure
 
 
