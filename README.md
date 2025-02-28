@@ -2,7 +2,7 @@
 # Scan2text
 
 <img src="https://res.cloudinary.com/dzdgpwtox/image/upload/w_450,c_scale,f_auto/v1712912790/designer-tool-uploads/bucket_3267/1712912786991.png" alt="chipi" height="250">
-Scan2text is a repository containing multiple models designed to extract text from images (and PDFs, if needed) and convert it into editable text. Inspired by the Amazon ML Challenge, and while I am only a participant in the challenge, this project showcases a variety of OCR approaches using state-of-the-art deep learning and traditional methods.
+Scan2text is a repository containing multiple models designed to extract text from images (and PDFs, if needed) and convert it into editable text. Inspired by the Amazon ML Challenge, and while we're only a participant in the challenge, this project showcases a variety of OCR approaches using state-of-the-art deep learning and traditional methods.
 
 
 ## Table of Contents
