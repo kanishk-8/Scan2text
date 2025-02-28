@@ -1,214 +1,157 @@
+
 # Scan2text
 
-Scan2text is a repository that contains multiple models designed to handle the same type of request—extracting text from images and providing the output. The repository leverages various OCR and deep learning models to process images (and PDFs, if needed) and convert the content into editable text. This project was inspired by the Amazon ML Challenge, which provided a dataset for testing and benchmarking text extraction techniques.
+<img src="https://res.cloudinary.com/dzdgpwtox/image/upload/w_450,c_scale,f_auto/v1712912790/designer-tool-uploads/bucket_3267/1712912786991.png" alt="chipi" height="250">
+Scan2text is a repository containing multiple models designed to extract text from images (and PDFs, if needed) and convert it into editable text. Inspired by the Amazon ML Challenge, and while I am only a participant in the challenge, this project showcases a variety of OCR approaches using state-of-the-art deep learning and traditional methods.
+
 
 ## Table of Contents
 
-- Features
+- [Dataset Structure](#dataset-structure)
+- [Features](#features)
+- [Models](#models)
+  - [Paligemma with Keras](#paligemma-with-keras)
+  - [BERT NER](#bert-ner)
+  - [BERT-Base NER](#bert-base-ner)
+  - [BERT-Large Cased (CoNLL03)](#bert-large-cased-conll03)
+  - [BERT-Optimised](#bert-optimised)
+  - [BERT-Tesseract Pipeline](#bert-tesseract-pipeline)
+  - [BLIP Image Captioning Base](#blip-image-captioning-base)
+  - [XLNet Tesseract](#xlnet-tesseract)
+- [Overview](#overview)
+## Dataset Structure
 
-- Dataset Structure
+The repository is designed to work seamlessly with the Amazon ML Challenge dataset (available on Kaggle). Below is a suggested directory layout for the dataset:
 
-- Prerequisites
-
-- Installation
-
-- Usage
-
-- Contributing
-
-- License
-
-- Acknowledgements
-
-- Contact
+```
+66e31d6ee96cd_student_/
+├── student_resource_3/
+│   ├── dataset/
+│   │   ├── sample_test.csv
+│   │   ├── sample_test_out_f.csv
+│   │   ├── test.csv
+│   │   └── train.csv
+│   ├── src/
+│   │   ├── constants.py
+│   │   ├── sanity.py
+│   │   ├── test.ipynb
+│   │   └── utils.py
+│   ├── README.md
+│   └── sample_code.py
+└── archive/
+        ├── train/
+        │   ├── image_001.png
+        │   └── ... 
+        └── test/
+            ├── image_001.png
+            └── ... 
+```
 
 ## Features
 
-- Multi-Model OCR: Supports multiple models that extract text from images.
+- **Multi-Model OCR:** Implements several models to extract text from images.
+- **Flexible Input Handling:** Supports various image formats (JPEG, PNG, etc.) and PDFs.
+- **Modular Architecture:** Allows swapping or updating OCR models independently.
+- **Batch Processing:** Capable of processing single files or entire directories.
+- **Challenge-Driven:** Developed in the context of the Amazon ML Challenge to explore diverse OCR techniques.
 
-- Flexible Input Handling: Processes various image formats (JPEG, PNG, etc.) and can also handle PDFs if required.
+## Models
 
-- Modular Architecture: Easily swap out or update OCR models without affecting the overall system.
+### Paligemma with Keras
+<img src="https://machinelearningmastery.com/wp-content/uploads/2021/08/attention_research_1.png" alt="Paligemma with Keras" height="250">
 
-- Batch Processing: Supports single-file processing as well as batch processing of directories.
+**Overview:**  
+A baseline deep learning model built with Keras. It uses convolutional neural networks (CNNs) for feature extraction followed by sequence modeling layers to quickly transform image features into readable text.
 
-- Dataset Compatibility: Designed to work seamlessly with the Amazon ML Challenge dataset for testing and evaluation.
+**Key Points:**
+- **Simple & Fast:** An initial prototype for OCR tasks.
+- **Benchmarking:** Serves as a baseline for comparing more advanced techniques.
 
-## Dataset Structure
+---
 
-For the Amazon ML Challenge dataset (available on Kaggle), a clear and organized structure is essential. Below is a suggested dataset directory layout:
+### BERT NER
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrBZYuRm6i3nDz07SqtHaVLZdNgVjJrnJDLVE1gn0sFL7lu2N2BtSNG4kjldSSBlwrwvA&usqp=CAU" alt="BERT NER" height="250">
 
-```
-Amazon_ML_Challenge_Dataset/
-├── data/
-│   ├── raw/
-│   │   ├── train/
-│   │   │   ├── image_001.jpg
-│   │   │   ├── image_002.jpg
-│   │   │   └── ... 
-│   │   └── test/
-│   │       ├── image_101.jpg
-│   │       ├── image_102.jpg
-│   │       └── ... 
-│   ├── annotations/
-│   │   ├── train_labels.csv    # Contains image IDs and corresponding ground truth text
-│   │   └── test_labels.csv     # (If available) Ground truth for the test set
-│   └── processed/
-│       ├── train/              # Preprocessed images (e.g., resized, grayscale)
-│       │   ├── image_001.png
-│       │   └── ... 
-│       └── test/
-│           ├── image_101.png
-│           └── ... 
-├── models/                     # Saved model weights and configurations for each model
-│   ├── model_A/
-│   ├── model_B/
-│   └── ...
-├── notebooks/                  # Jupyter notebooks for exploratory data analysis and experiments
-│   ├── exploratory_analysis.ipynb
-│   ├── model_training.ipynb
-│   └── evaluation.ipynb
-├── scripts/                    # Utility scripts for preprocessing, training, and prediction
-│   ├── preprocess.py
-│   ├── train_model.py
-│   └── predict.py
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-└── LICENSE
-```
-<div><img src="https://machinelearningmastery.com/wp-content/uploads/2021/08/attention_research_1.png" alt="Scan2text Logo" height="400" >
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrBZYuRm6i3nDz07SqtHaVLZdNgVjJrnJDLVE1gn0sFL7lu2N2BtSNG4kjldSSBlwrwvA&usqp=CAU" alt="Scan2text Logo" height="400" >
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStdVyIlGWgJVjWtBMNOCfK7GA2CAWPuVqhDFUiTrw9y7I0Qzx63t4fDF-irj02uiGYVnM&usqp=CAU" alt="Scan2text Logo" height="400" >
-  <img src="https://miro.medium.com/v2/resize:fit:1400/1*IHT7lqvEiuu1BzVIXXD0hA.png" alt="Scan2text Logo" height="400" >
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgmMpEY8CqGlMRT2OHIeyNW6wHWtlm1L02Cpe5esFGbuRFn6BXE5KWbA7J26pNXAT1sA&usqp=CAU" alt="Scan2text Logo" height="400" >
-</div>
+**Overview:**  
+Utilizes the BERT transformer architecture fine-tuned for Named Entity Recognition (NER) to process raw OCR outputs, identifying and labeling entities such as names, dates, and organizations.
 
-## Explanation of the Structure
+**Key Points:**
+- **Context-Aware Refinement:** Corrects misrecognized entities.
+- **Improved Accuracy:** Particularly beneficial for documents where entity recognition is critical.
 
+---
 
-- data/raw:Contains the original images from the challenge. Images are separated into training and testing folders.
+### BERT-Base NER
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStdVyIlGWgJVjWtBMNOCfK7GA2CAWPuVqhDFUiTrw9y7I0Qzx63t4fDF-irj02uiGYVnM&usqp=CAU" alt="BERT-Base NER" height="250">
 
+**Overview:**  
+A lighter variant of the standard BERT-base model fine-tuned for NER. It strikes a balance between accuracy and inference speed.
 
-- data/annotations:CSV files containing the ground truth text (and possibly bounding box coordinates, if available) for each image. This helps in both training and evaluation.
+**Key Points:**
+- **Efficiency:** Ideal for real-time applications or limited-resource environments.
+- **Competitive Performance:** Maintains accuracy while speeding up processing.
 
+---
 
-- data/processed:Contains the preprocessed versions of images (e.g., resized, normalized, or converted to grayscale) ready for model input.
+### BERT-Large Cased (CoNLL03)
+<img src="https://miro.medium.com/v2/resize:fit:1400/1*IHT7lqvEiuu1BzVIXXD0hA.png" alt="BERT-Large Cased (CoNLL03)" height="250">
 
+**Overview:**  
+This model uses a larger, cased version of BERT pre-trained on the CoNLL03 dataset, excelling in capturing fine-grained textual nuances.
 
-- models:Each subdirectory holds a different model’s configuration, weights, and any associated metadata. This modular approach lets you compare multiple OCR solutions.
+**Key Points:**
+- **High Accuracy:** Robust recognition even in complex or noisy text.
+- **Detailed Output:** Preserves capitalization cues for correct interpretation.
 
+---
 
-- notebooks:Jupyter notebooks that document exploratory data analysis, model training, and evaluation procedures. They serve as both documentation and a way to reproduce experiments.
+### BERT-Optimised
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgmMpEY8CqGlMRT2OHIeyNW6wHWtlm1L02Cpe5esFGbuRFn6BXE5KWbA7J26pNXAT1sA&usqp=CAU" alt="BERT-Optimised" height="250">
 
+**Overview:**  
+An enhanced version of the BERT approach, further fine-tuned for OCR challenges to reduce errors and improve overall text quality.
 
-- scripts:Contains standalone scripts for data preprocessing, model training, and prediction. These scripts can be invoked from the command line or integrated into a CI/CD pipeline for automated workflows.
+**Key Points:**
+- **Tailored Optimization:** Designed specifically for handling OCR-specific errors.
+- **Error Reduction:** Enhances clarity and readability of extracted text.
 
-## Prerequisites
+---
 
+### BERT-Tesseract Pipeline
+<img src="https://i0.wp.com/neptune.ai/wp-content/uploads/2022/10/Attention_diagram_transformer.png?ssl=1" alt="BERT-Tesseract Pipeline" height="250">
 
-- Python 3.6+
+**Overview:**  
+A hybrid model that combines Tesseract OCR’s raw text extraction with BERT’s contextual refinement to produce more accurate text.
 
+**Key Points:**
+- **Combined Strengths:** Integrates traditional OCR with modern language modeling.
+- **Versatile:** Performs well in scenarios where standalone OCR might struggle.
 
-- Tesseract OCR (if using Tesseract-based models):
+---
 
+### BLIP Image Captioning Base
+<img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2024/03/BLIP-Model-architecture-pretraining.webp" alt="BLIP Image Captioning Base" height="250">
 
-- Installation details: Tesseract GitHub
+**Overview:**  
+Repurposes the BLIP model—originally designed for image captioning—to extract descriptive text. It interprets both explicit text and the overall visual context.
 
+**Key Points:**
+- **Contextual Understanding:** Captures explicit text and implicit contextual details.
+- **Enhanced Descriptions:** Ideal for images where text is intertwined with visual elements.
 
-- Required Python Libraries:
+---
 
+### XLNet Tesseract
+<img src="https://machinereads.wordpress.com/wp-content/uploads/2020/05/image-5.png" alt="XLNet Tesseract" height="250">
 
-- pytesseract, Pillow, pdf2image, etc. (see requirements.txt)
+**Overview:**  
+Starts with Tesseract for initial OCR extraction, then uses XLNet to refine the output. XLNet improves sentence coherence by reordering and refining the text.
 
-## Installation
+**Key Points:**
+- **Advanced Refinement:** Leverages XLNet’s bidirectional context understanding.
+- **Improved Coherence:** Produces more natural and accurate text output.
 
+---
 
-- Clone the Repository:
-
-
-```
-git clone https://github.com/kanishk-8/Scan2text.git
-cd Scan2text
-```
-
-- Install Python Dependencies:
-
-```
-pip install -r requirements.txt
-Install Tesseract OCR (if needed):
-```
-
-- Ubuntu:
-
-```
-sudo apt-get update
-sudo apt-get install tesseract-ocr
-```
-
-- macOS (via Homebrew):
-
-```
-brew install tesseract
-```
-
-- Windows: Download and install from Tesseract at UB Mannheim.
-
-
-## Usage
-
-
-- To extract text from an image:
-
-```
-python scan2text.py --input path/to/image.jpg --output output.txt
-```
-
-- For batch processing or using PDFs, refer to the help menu:
-
-```
-python scan2text.py --help
-```
-
-## Contributing
-
-
-- Contributions are welcome! To contribute:
-
-
-- Fork the repository.
-
-
-- Create a new branch: git checkout -b feature/your-feature.
-
-
-- Commit your changes: git commit -am "Describe your feature or fix".
-
-
-- Push your branch: git push origin feature/your-feature.
-
-
-- Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Acknowledgements
-
-
-- Tesseract OCR
-
-
-- pytesseract
-
-
-- Pillow
-
-
-- Thanks to the contributors of the Amazon ML Challenge dataset on Kaggle.
-
-## Contact
-
-For questions or suggestions, please open an issue on GitHub or contact the maintainer at email@example.com.
-
-Feel free to adjust the sections to better fit the specifics of your implementation and the dataset details.
+## Overview:
+Scan2text is a repository showcasing multiple approaches to optical character recognition (OCR). While I’m only a participant in the Amazon ML Challenge, this project explores how different models—ranging from CNN-based architectures in Keras to advanced transformer-based techniques like BERT and XLNet—can extract and refine text from images or PDFs. By providing a modular structure, recommended dataset organization, and an array of scripts and notebooks, Scan2text aims to help users experiment with and compare various OCR methods in terms of performance, accuracy, and practical application.
